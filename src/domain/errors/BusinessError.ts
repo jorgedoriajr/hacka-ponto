@@ -13,5 +13,6 @@ export enum BusinessErrorType {
   InvalidParam = 'InvalidParam',
   NotFound = 'NotFound',
   AlreadyExists = 'AlreadyExists',
-  Unexpected = 'Unexpected'
+  Unexpected = 'Unexpected',
+  InvalidOperation = 'InvalidOperation'
 }
