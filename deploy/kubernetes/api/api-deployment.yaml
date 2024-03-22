@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-hacka
+  labels:
+    app: api-hacka
+spec:
+  template:
+    metadata:
+      name: api-hacka
+      labels:
+        app: api-hacka
+    spec:
+      containers:
+        - name: api-hacka-container
+          image: 905418419045.dkr.ecr.us-east-1.amazonaws.com/hacka-ponto:main
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: 1
+              memory: 256Mi
+          envFrom:
+            - secretRef:
+                name: api-hacka-secrets
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-hacka

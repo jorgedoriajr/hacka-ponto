@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-hacka-mongo
+  labels:
+    app: api-hacka-mongo
+spec:
+  template:
+    metadata:
+      name: api-hacka-mongo
+      labels:
+        app: api-hacka-mongo
+    spec:
+      containers:
+        - name: api-hacka-mongo-container
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongodb-data
+              mountPath: /var/lib/mongodb
+          resources:
+            limits:
+              cpu: 1
+              memory: 1Gi
+          envFrom:
+            - secretRef:
+                name: db-api-hacka-secrets
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: pvc-db-api-hacka
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-hacka-mongo
