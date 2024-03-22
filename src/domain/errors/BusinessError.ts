@@ -14,5 +14,6 @@ export enum BusinessErrorType {
   NotFound = 'NotFound',
   AlreadyExists = 'AlreadyExists',
   Unexpected = 'Unexpected',
-  InvalidOperation = 'InvalidOperation'
+  InvalidOperation = 'InvalidOperation',
+  WrongCredentials = 'WrongCredentials'
 }

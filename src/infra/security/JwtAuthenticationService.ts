@@ -1,14 +1,17 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
-import { env } from '../../../main/env'
+import { env } from '../../main/env'
 
-export class JwtMiddleware {
+export class JwtAuthenticationService {
   static async verifyToken(req: Request, res: Response, next: NextFunction) {
     const token = req.headers['authorization']
 
     if (!token) return res.status(403).send({ auth: false, message: 'No token provided.' })
 
-    jwt.verify(token, env.jwtSecret, (err, decoded) => {
+    jwt.verify(token, env.jwtSecret, (err, decoded: any) => {
+      if (req.params.userId !== decoded?.id)
+        return res.status(403).send({ auth: false, message: 'You are not authorized to access this resource.' })
+
       if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' })
 
       next()

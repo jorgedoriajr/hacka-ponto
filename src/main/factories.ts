@@ -13,6 +13,8 @@ import { IGetDayWorkJourneyUseCase } from '../domain/usecases/GetDayWorkJourney/
 import { EmailService } from '../infra/services/EmailService'
 import { SendMonthlyReportToEmployeeUseCase } from '../domain/usecases/SendMonthlyReportToEmployee/SendMonthlyReportToEmployee'
 import { ISendMonthlyReportToEmployeeUseCase } from '../domain/usecases/SendMonthlyReportToEmployee/ISendMonthlyReportToEmployee'
+import { ISignInEmployeeUseCase } from '../domain/usecases/SignInEmployee/ISignInEmployee'
+import { SignInEmployeeUseCase } from '../domain/usecases/SignInEmployee/SignInEmployee'
 
 export async function initializeContainer() {
   const mongoDbClientInstance = await MongoDbClient.connect(env.mongoUrl)
@@ -25,6 +27,7 @@ export async function initializeContainer() {
   container.registerSingleton('EmailService', EmailService)
 
   container.register<ISendMonthlyReportToEmployeeUseCase>('ISendMonthlyReportToEmployeeUseCase', SendMonthlyReportToEmployeeUseCase)
+  container.register<ISignInEmployeeUseCase>('ISignInEmployeeUseCase', SignInEmployeeUseCase)
   container.register<ICreateEmployeeUseCase>('ICreateEmployeeUseCase', CreateEmployeeUseCase)
   container.register<IRegisterTimeEntryUseCase>('IRegisterTimeEntryUseCase', RegisterTimeEntryUseCase)
   container.register<IGetDayWorkJourneyUseCase>('IGetDayWorkJourneyUseCase', GetDayWorkJourneyUseCase)
