@@ -4,4 +4,5 @@ export interface IWorkJourneyRepository {
   create: (workJourney: WorkJourney) => Promise<boolean>
   update: (workJourney: WorkJourney) => Promise<boolean>
   getByIdAndDate: (employeeId: string, date: string) => Promise<WorkJourney | null>
+  getByTimeRange: (employeeId: string, startDate: string, endDate: string) => Promise<WorkJourney[]>
 }

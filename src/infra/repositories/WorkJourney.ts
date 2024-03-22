@@ -59,4 +59,18 @@ export class WorkJourneyRepository implements IWorkJourneyRepository {
       workedTime: workJourney.workedTime,
     })
   }
+
+  async getByTimeRange(employeeId: string, startDate: string, endDate: string): Promise<WorkJourney[]> {
+    const workJourneys = await this.collection.find({ employeeId, date: { $gte: startDate, $lte: endDate } }).toArray()
+
+    return workJourneys.map(workJourney => new WorkJourney({
+      id: workJourney.id,
+      createdAt: workJourney.createdAt,
+      updatedAt: workJourney.updatedAt,
+      date: workJourney.date,
+      employee: new Employee({ id: workJourney.employeeId }),
+      timeEntries: workJourney.timeEntries,
+      workedTime: workJourney.workedTime,
+    }))
+  }
 }

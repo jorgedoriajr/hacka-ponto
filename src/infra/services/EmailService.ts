@@ -8,9 +8,7 @@ export class EmailService {
 
   constructor() {
     this.transporter = createTransport({
-      host: env.emailServiceHost,
-      port: Number(env.emailServicePort),
-      secure: false,
+      service: 'gmail',
       auth: {
         user: env.emailServiceUser,
         pass: env.emailServicePassword
