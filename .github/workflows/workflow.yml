@@ -48,9 +48,6 @@ jobs:
   continuous-deployment:
     needs: [continuous-integration]
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./deploy
     steps:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -69,5 +66,8 @@ jobs:
         chmod +x ./kubectl
         sudo mv ./kubectl /usr/local/bin/kubectl
 
+    - name: Print working directory
+      run: ls -la
+
     - name: Deploy to Kubernetes
-      run: kubectl apply -f secrets && kubectl apply -f db && kubectl apply -f api
+      run: kubectl apply -f /deploy/kubernetes/secrets && kubectl apply -f ./deploy/kubernetes/db && kubectl ./deploy/kubernetes/apply -f api
