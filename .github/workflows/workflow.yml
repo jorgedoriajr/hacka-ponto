@@ -48,6 +48,9 @@ jobs:
   continuous-deployment:
     needs: [continuous-integration]
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./deploy
     steps:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
