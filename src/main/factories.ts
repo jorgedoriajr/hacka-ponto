@@ -10,6 +10,7 @@ import { RegisterTimeEntryUseCase } from '../domain/usecases/RegisterTimeEntry/R
 import { IRegisterTimeEntryUseCase } from '../domain/usecases/RegisterTimeEntry/IRegisterTimeEntry'
 import { GetDayWorkJourneyUseCase } from '../domain/usecases/GetDayWorkJourney/GetDayWorkJourney'
 import { IGetDayWorkJourneyUseCase } from '../domain/usecases/GetDayWorkJourney/IGetDayWorkJourney'
+import { EmailService } from '../infra/services/EmailService'
 
 export async function initializeContainer() {
   const mongoDbClientInstance = await MongoDbClient.connect(env.mongoUrl)
@@ -18,6 +19,8 @@ export async function initializeContainer() {
 
   container.registerSingleton('IEmployeeRepository', EmployeeRepository)
   container.registerSingleton('IWorkJourneyRepository', WorkJourneyRepository)
+
+  container.registerSingleton('EmailService', EmailService)
 
   container.register<ICreateEmployeeUseCase>('ICreateEmployeeUseCase', CreateEmployeeUseCase)
   container.register<IRegisterTimeEntryUseCase>('IRegisterTimeEntryUseCase', RegisterTimeEntryUseCase)
