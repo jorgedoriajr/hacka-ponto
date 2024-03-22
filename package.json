@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.ts",
   "scripts": {
-    "build": "rimraf dist && tsc -p . && cp -r docs dist",
+    "build": "rimraf dist && tsc -p .",
     "test": "jest --coverage --detectOpenHandles --forceExit --verbose --silent",
     "start": "node dist/main/app.js",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/main/app.ts",
