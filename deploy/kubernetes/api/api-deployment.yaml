@@ -14,6 +14,7 @@ spec:
       containers:
         - name: api-hacka-container
           image: 905418419045.dkr.ecr.us-east-1.amazonaws.com/hacka-ponto:main
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           resources:
