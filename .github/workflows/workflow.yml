@@ -70,3 +70,7 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: kubectl apply -f ./deploy/kubernetes/secrets && kubectl apply -f ./deploy/kubernetes/db && kubectl apply -f ./deploy/kubernetes/api
+
+    - name: Restart Kubernetes deployment
+      run: |
+        kubectl rollout restart deployment/api-hacka 
