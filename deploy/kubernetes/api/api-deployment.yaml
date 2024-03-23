@@ -23,7 +23,7 @@ spec:
           envFrom:
             - secretRef:
                 name: api-hacka-secrets
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: api-hacka
