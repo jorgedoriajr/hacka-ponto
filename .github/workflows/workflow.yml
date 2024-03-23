@@ -68,8 +68,5 @@ jobs:
         chmod +x ./kubectl
         sudo mv ./kubectl /usr/local/bin/kubectl
 
-    - name: Print working directory
-      run: ls -la
-
     - name: Deploy to Kubernetes
       run: kubectl apply -f ./deploy/kubernetes/secrets && kubectl apply -f ./deploy/kubernetes/db && kubectl apply -f ./deploy/kubernetes/api
