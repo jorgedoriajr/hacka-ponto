@@ -11,7 +11,7 @@ export function checkAuthentication(req: Request, res: Response, next: NextFunct
     return res.status(401).json({ error: 'Unauthorized' })
   }
 
-  JwtAuthenticationService.verifyToken(authorization, req.params.employeeId)
+  JwtAuthenticationService.verifyToken(authorization, employeeId)
     .then((isAuthenticated) => {
       if (!isAuthenticated) {
         return res.status(401).json({ error: 'Unauthorized' })
