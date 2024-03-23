@@ -32,6 +32,8 @@ export class SendMonthlyReportToEmployeeUseCase implements ISendMonthlyReportToE
     const journeys = await this.workJourneyRepository.getByTimeRange(employeeId, thisMonthRange.startDate, thisMonthRange.endDate)
 
     await this.emailService.sendEmail(employee.email, 'Monthly report', this.formatEmailBody(journeys))
+
+    console.log(`[SendMonthlyReportToEmployeeUseCase] Email sent successfully with ${journeys.length} journeys to ${employee.email}`)
   }
 
   private async checkIfEmployeeExists(employeeId: string): Promise<Employee> {
@@ -56,7 +58,7 @@ export class SendMonthlyReportToEmployeeUseCase implements ISendMonthlyReportToE
 
   private formatEmailBody(journeys: WorkJourney[]) {
     const journeysString = journeys.map(journey => {
-      return `Date: ${journey.date}, Worked Time: ${(journey.workedTime / 60).toFixed(2)} hours, Time Entries: ${journey.timeEntries.length}`
+      return `Date: ${journey.date}, Worked Time: ${(journey.workedTime / 60).toFixed(2)} hours, Time Entries: ${journey.timeEntries.length} `
     }).join('\n')
 
     return journeysString
